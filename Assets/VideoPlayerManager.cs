@@ -23,7 +23,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject[] Survey;
     private uint VidWidth = 0;
     private uint VidHeight = 0;
-    public static bool PlayAccept = 0;
+    public static bool PlayAccept = false;
 
     private void OnEnable()
     {
@@ -31,7 +31,7 @@ public class NewBehaviourScript : MonoBehaviour
         Transform parentTransform = transform;
 
         // Player 배열 크기를 빈 오브젝트의 자식 개수로 조정.
-        Players new GameObject[parentTransform.childCount];
+        Players = new GameObject[parentTransform.childCount];
 
         // 빈 오브젝트의 개수만큼 반복
         for (int i = 0; i < parentTransform.childCount; i++)
@@ -55,7 +55,7 @@ public class NewBehaviourScript : MonoBehaviour
             player.GetComponent<VideoPlayer>().targetTexture = RenderTexture;
 
             player.GetComponent<VideoPlayer>().playOnAwake = false;
-            player.GetCOmponenet<VideoPlayer>().Play();
+            player.GetComponent<VideoPlayer>().Play();
             PlayAccept = true;
         }
     }
@@ -103,7 +103,7 @@ public class NewBehaviourScript : MonoBehaviour
                     player.GetComponent<VideoPlayer>().targetTexture = RenderTexture;
                     player.SetActive(true);
                     player.GetComponent<VideoPlayer>().playOnAwake = false;
-                    playing_time = 0.0f
+                    playing_time = 0.0f;
                     player.GetComponent<VideoPlayer>().Play();
                 }
             }
@@ -138,6 +138,8 @@ public class NewBehaviourScript : MonoBehaviour
             GameObject childGameObject = childTransform.gameObject;
             childrenList.Add(childGameObject);
         }
+
+        return childrenList; // List<GameObject> 생성
     }
 
     void GetVidSource(GameObject Vid) // 영상 해상도에 따라서 Material과 RenderTexture 설정

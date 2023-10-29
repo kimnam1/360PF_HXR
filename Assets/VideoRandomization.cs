@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-public class VideoRanmomization : MonoBehaviour
+public class VideoRandomization : MonoBehaviour
 {
     [SerializeField] private VideoClip v1 = null;
     [SerializeField] private VideoClip v2 = null;

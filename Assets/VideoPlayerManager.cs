@@ -51,7 +51,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         if (skyboxMaterial == true && RenderTexture == true)
         {
-            RenderSetting.skybox = skyboxMaterial;
+            RenderSettings.skybox = skyboxMaterial;
             player.GetComponent<VideoPlayer>().targetTexture = RenderTexture;
 
             player.GetComponent<VideoPlayer>().playOnAwake = false;
@@ -85,7 +85,7 @@ public class NewBehaviourScript : MonoBehaviour
 
                 player.GetComponent<VideoPlayer>().Pause();
                 player.SetActive(false);
-                NewSliderController.SurveyFinish = false; // 이름 변경 필요.
+                SliderManager.SurveyFinish = false; // 이름 변경 필요.
             }
         }
 
@@ -94,8 +94,8 @@ public class NewBehaviourScript : MonoBehaviour
         {
             if (PlayAccept == true)
             {
-                NewSliderController.SurveyFinish = false;
-                if (NewSliderController.FinalEnd == false && NewSliderConroller.SurveyFinishi == false)
+                SliderManager.SurveyFinish = false;
+                if (SliderManager.FinalEnd == false && SliderManager.SurveyFinish == false)
                 {
                     player = Players[VidNumb];
                     GetVidSource(player);
@@ -113,10 +113,10 @@ public class NewBehaviourScript : MonoBehaviour
             }
         }
         // 설문 종료 후 이전 영상 끄고 PlayAccep 변환
-        if (NewSliderController.SurveyFinish == true)
+        if (SliderManager.SurveyFinish == true)
         {
             Survey[(VidNumb / 2) - 1].SetActive(false); // 비디오 수 변경되면 수정 필요
-            NewSliderController.SaveTrigger = false;
+            SliderManager.SaveTrigger = false;
             StartCoroutine(DelayTime(0.5f));
             PlayAccept = true;
         }
@@ -126,7 +126,7 @@ public class NewBehaviourScript : MonoBehaviour
     public static IEnumerator DelayTime(float delay) // delay 시간만큼 나중에 실행
     {
         yield return new WaitForSeconds(delay);
-        NewSliderController.SurveyFinish = false;
+        SliderManager.SurveyFinish = false;
     }
 
     public static List<GameObject> GetChildrenList(GameObject parent) // Children 정보 받아오기

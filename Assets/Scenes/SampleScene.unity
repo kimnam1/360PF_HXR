@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 1956673088}
   - component: {fileID: 1956673089}
   m_Layer: 0
-  m_Name: 2K_30fps_Dubai
+  m_Name: Dubai_2K_30fps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,6 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1983525924}
   - component: {fileID: 1983525925}
+  - component: {fileID: 1983525926}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -449,3 +450,25 @@ MonoBehaviour:
   FinalClips: []
   VideoPlayer: {fileID: 0}
   csvFileName: 
+--- !u!114 &1983525926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983525923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf877f756670ed148994ad2089762bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skyboxMaterial: {fileID: 0}
+  skyboxMaterial_2K: {fileID: 2100000, guid: cf42566fb9f8a6a4a8909c366bc52a10, type: 2}
+  skyboxMaterial_4K: {fileID: 2100000, guid: 380d3efacba958242be41493dc5cd83c, type: 2}
+  skyboxMaterial_8K: {fileID: 2100000, guid: 92f6208fb1804e64f9a955cad6475431, type: 2}
+  RenderTexture: {fileID: 0}
+  RenderTexture_2K: {fileID: 8400000, guid: e1b0c7adc6e3a7144894dd4f43b1ffa5, type: 2}
+  RenderTexture_4K: {fileID: 8400000, guid: 3714b1a2dce137a49988bc7a1ae2e24c, type: 2}
+  RenderTexture_8K: {fileID: 8400000, guid: 55c9c1e3383e33543aa337676544d820, type: 2}
+  Players: []
+  Survey: []

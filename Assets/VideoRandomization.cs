@@ -204,7 +204,7 @@ public class VideoRandomization : MonoBehaviour
     public static VideoClip[,] ReorderedArray(List<List<int>> orderList, VideoClip[,] videoClips) // List<List<int>> orderList 내에 있는 순서로 VideoClip[,] vidoeClips 내 비디오 순서 재배열
     {
         VideoClip[,] result = new VideoClip[4, 14];
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 14; j++)
             {

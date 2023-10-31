@@ -69,7 +69,7 @@ public class VideoPlayerManager : MonoBehaviour
         {
             playing_time += Time.deltaTime;
 
-            if (playing_time >= 10.0f) // 30초보다 길거나 짧은 영상이 있음. 5초에서 10초 정도 텀이 필요할 수도 있음.
+            if (playing_time >= 30.0f) // 30초보다 길거나 짧은 영상이 있음. 5초에서 10초 정도 텀이 필요할 수도 있음.
             {
                 if (VidNumb < 70)
                 {
@@ -80,12 +80,12 @@ public class VideoPlayerManager : MonoBehaviour
                 if (VidNumb % 2 == 0) // 두 개 영상 시청 후, 설문조사 진행 -> 비디오 수 변경되면 수정 필요.
                 {
                     PlayAccept = false;
-                    // Debug.Log(PlayAccept);
+                    Debug.Log("Play Accept : " + PlayAccept);
                 }
 
                 player.GetComponent<VideoPlayer>().Pause();
                 player.SetActive(false);
-                SliderManager.SurveyFinish = false; // 이름 변경 필요.
+                SliderManager.SurveyFinish = false;
             }
         }
 
@@ -112,7 +112,7 @@ public class VideoPlayerManager : MonoBehaviour
                 Survey[(VidNumb / 2) - 1].SetActive(true); // 비디오 수 변경되면 수정 필요.
             }
         }
-        // 설문 종료 후 이전 영상 끄고 PlayAccep 변환
+        // 설문 종료 후 이전 영상 끄고 PlayAccept 변환
         if (SliderManager.SurveyFinish == true)
         {
             Survey[(VidNumb / 2) - 1].SetActive(false); // 비디오 수 변경되면 수정 필요
@@ -166,7 +166,6 @@ public class VideoPlayerManager : MonoBehaviour
                 skyboxMaterial = skyboxMaterial_8K;
                 RenderTexture = RenderTexture_8K;
             }
-
         }
     }
 

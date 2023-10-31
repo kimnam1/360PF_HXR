@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class NewBehaviourScript : MonoBehaviour
+public class VideoPlayerManager : MonoBehaviour
 {
     [SerializeField] private Material skyboxMaterial;
     [SerializeField] private Material skyboxMaterial_2K;
@@ -18,7 +18,7 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private GameObject[] Players;
 
     private GameObject player;
-    private float playing_time = 0.0f;
+    private float playing_time = 10.0f;
     private int VidNumb = 0;
     public GameObject[] Survey;
     private uint VidWidth = 0;
@@ -169,9 +169,6 @@ public class NewBehaviourScript : MonoBehaviour
 
         }
     }
-
-
-
 
     // Start is called before the first frame update
     void Start()

@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class SliderManager : MonoBehaviour
 {
     [SerializeField] Slider AnswerSlider;
-    public int SurveyNumb = 1; // 하나의 설문 안에서 설문 문항 수를 바꾸면 수정 필요
-    public static bool Activation = false;
+    public int SurveyNumber = 1; // 하나의 설문 안에서 설문 문항 수를 바꾸면 수정 필요
+    public static bool isActive = false;
     int y_threshold = 0;
     float x_threshold = 0;
     float z_threshold = 0;
@@ -29,7 +29,7 @@ public class SliderManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Activation = true;
+        isActive = true;
         SurveyFinish = false;
         FinalEnd = false;
 
@@ -46,7 +46,7 @@ public class SliderManager : MonoBehaviour
     void Update()
     {
         List<Transform> children = GetChildren(transform);
-        if (Activation)
+        if (isActive)
         {
             // 설문 점수 조정키 M, N ------------------------------ to do 왼쪽 오른쪽 화살표로 바꾸자 https://docs.unity3d.com/ScriptReference/KeyCode.html
             if (Input.GetKeyDown(KeyCode.M))
@@ -90,22 +90,22 @@ public class SliderManager : MonoBehaviour
                 z_threshold += 1;
                 if (z_threshold == 1)
                 {
-                    if (SurveyNumb < 12) // 문항 갯수에 따라서 바꿔줘야 함.
+                    if (SurveyNumber < 12) // 문항 갯수에 따라서 바꿔줘야 함.
                     {
-                        children[SurveyNumb].gameObject.SetActive(true);
-                        AnswerSlider = children[SurveyNumb].GetComponent<Slider>();
-                        if (SurveyNumb > 0)
+                        children[SurveyNumber].gameObject.SetActive(true);
+                        AnswerSlider = children[SurveyNumber].GetComponent<Slider>();
+                        if (SurveyNumber > 0)
                         {
-                            children[SurveyNumb - 1].gameObject.SetActive(false);
+                            children[SurveyNumber - 1].gameObject.SetActive(false);
                         }
-                        SurveyNumb++;
+                        SurveyNumber++;
 
                     }
-                    else if (SurveyNumb == 12) // 문항 갯수에 따라서 바꿔줘야 함.
+                    else if (SurveyNumber == 12) // 문항 갯수에 따라서 바꿔줘야 함.
                     {
-                        AnswerSlider = children[SurveyNumb - 1].GetComponent<Slider>();
-                        children[SurveyNumb - 2].gameObject.SetActive(false);
-                        children[SurveyNumb - 1].gameObject.SetActive(true);
+                        AnswerSlider = children[SurveyNumber - 1].GetComponent<Slider>();
+                        children[SurveyNumber - 2].gameObject.SetActive(false);
+                        children[SurveyNumber - 1].gameObject.SetActive(true);
                     }
                     z_threshold = 0;
                 }
@@ -115,19 +115,19 @@ public class SliderManager : MonoBehaviour
                 z_threshold -= 1;
                 if (z_threshold == -1)
                 {
-                    if (SurveyNumb > 1 && SurveyNumb <= 12) // 문항 개수에 따라 바꿔줘야 함.
+                    if (SurveyNumber > 1 && SurveyNumber <= 12) // 문항 개수에 따라 바꿔줘야 함.
                     {
-                        SurveyNumb--;
-                        children[SurveyNumb].gameObject.SetActive(false);
-                        children[SurveyNumb - 1].gameObject.SetActive(true);
-                        AnswerSlider = children[SurveyNumb - 1].GetComponent<Slider>();
+                        SurveyNumber--;
+                        children[SurveyNumber].gameObject.SetActive(false);
+                        children[SurveyNumber - 1].gameObject.SetActive(true);
+                        AnswerSlider = children[SurveyNumber - 1].GetComponent<Slider>();
 
                     }
-                    else if (SurveyNumb == 1)
+                    else if (SurveyNumber == 1)
                     {
-                        children[SurveyNumb - 1].gameObject.SetActive(false);
-                        children[SurveyNumb].gameObject.SetActive(true);
-                        AnswerSlider = children[SurveyNumb].GetComponent<Slider>();
+                        children[SurveyNumber - 1].gameObject.SetActive(false);
+                        children[SurveyNumber].gameObject.SetActive(true);
+                        AnswerSlider = children[SurveyNumber].GetComponent<Slider>();
 
                     }
                     z_threshold = 0;
@@ -146,7 +146,7 @@ public class SliderManager : MonoBehaviour
                     y_threshold = 0;
                     SaveTrigger = true;
                     Debug.Log("이번 설문은 " + SurveyCountNumber + "번 째 입니다.");
-                    children[SurveyNumb - 1].gameObject.SetActive(false);
+                    children[SurveyNumber - 1].gameObject.SetActive(false);
                     SurveyFinish = true;
                 }
                 else if (SurveyCountNumber == 35)

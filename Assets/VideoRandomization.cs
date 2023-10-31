@@ -85,23 +85,22 @@ public class VideoRandomization : MonoBehaviour
             string filePath = "DataCombination";
 
             // CSV 파일을 읽어서 List<List<string>>에 저장하는 메서드 호출
-            List<List<string>> DataList = ReadCSVFile(filePath); // to do
+            List<List<string>> DataList = loadCSV(filePath);
 
             // string List 변수 int List 변수로 변환 & int List 조합 생성
-            List<List<int>> Combination = SelectedValues(String_to_int(DataList)); // to do
+            List<List<int>> Combination = SelectedValues(StringToInt(DataList));
 
             // List<int>로 변환
             OneList = FlattenList(Combination);
 
             // List<List<Int>>로 합치기
             CombinationList.Add(OneList);
-
         }
 
         // CombinationLIst 정보 저장 CSV
         SceneFullName = SceneManager.GetActiveScene().name;
         csvFileName = "Result" + SceneFullName + ".csv";
-        CreateCSV();// to do
+        CreateCSV();
 
         // 받아온 List<List<int>>로 영상 순서 배열
         ReorderedClips = ReorderedArray(CombinationList, VideoArray);
@@ -138,9 +137,9 @@ public class VideoRandomization : MonoBehaviour
         return childrenList;
     }
 
-    public static List<List<int>> String_to_int(List<List<string>> Strings) // String to Int 
+    public static List<List<int>> StringToInt(List<List<string>> Strings) // String to Int 
     {
-        List<List<int>> New_List = new List<List<int>>();
+        List<List<int>> Result = new List<List<int>>();
         foreach (List<string> strList in Strings)
         {
             List<int> intList = new List<int>();
@@ -150,10 +149,9 @@ public class VideoRandomization : MonoBehaviour
                 int num = int.Parse(str);
                 intList.Add(num);
             }
-            New_List.Add(intList);
+            Result.Add(intList);
         }
-
-        return New_List;
+        return Result;
     }
 
     public static List<List<int>> SelectedValues(List<List<int>> Integers) // 조합 내 배열 무작위
@@ -193,30 +191,28 @@ public class VideoRandomization : MonoBehaviour
 
     public static List<int> FlattenList(List<List<int>> lsts) // 영상 조합 하나의 리스토
     {
-        List<int> flattened = new List<int>();
+        List<int> result = new List<int>();
 
         foreach (var sublist in lsts)
         {
-            flattened.AddRange(sublist);
+            result.AddRange(sublist);
         }
 
-        return flattened;
+        return result;
     }
 
     public static VideoClip[,] ReorderedArray(List<List<int>> orderList, VideoClip[,] videoClips) // List<List<int>> orderList 내에 있는 순서로 VideoClip[,] vidoeClips 내 비디오 순서 재배열
     {
-        VideoClip[,] reordered = new VideoClip[4, 14];
+        VideoClip[,] result = new VideoClip[4, 14];
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 14; j++)
             {
-                int newIdx = orderList[i][j];
-                reordered[i, j] = videoClips[i, newIdx];
+                int newIndex = orderList[i][j];
+                result[i, j] = videoClips[i, newIndex];
             }
         }
-
-        return reordered;
-
+        return result;
     }
 
     public VideoClip[] ShuffleVideoClips(VideoClip[] videoClips) // VideoClip[] videoClips 내 1차원 비열 비디오 2개 씩 묶어서 순서 재배열(랜덤)
@@ -234,9 +230,9 @@ public class VideoRandomization : MonoBehaviour
             }
         }
 
-        // 랜덤하게 섞기
+        // paired 랜덤하게 섞기
         System.Random rng = new System.Random();
-        paired = paired.OrderBy(pair => rng.Next()).ToList();
+        paired = paired.OrderBy(pair => rng.Next()).ToList(); // 이걸 잘 모르겠네... 랜덤을 왜 이렇게 하지 -남일
 
         // 재배열
         List<VideoClip> shuffled = new List<VideoClip>();
@@ -251,7 +247,7 @@ public class VideoRandomization : MonoBehaviour
         return shuffled.ToArray();
     }
 
-    public static List<List<string>> ReadCSVFile(string fileName)
+    public static List<List<string>> loadCSV(string fileName)
     {
         // CSV 파일을 한 줄씩 읽기위해서 TextAsset 사용???
         TextAsset CSVFile = Resources.Load<TextAsset>(fileName);

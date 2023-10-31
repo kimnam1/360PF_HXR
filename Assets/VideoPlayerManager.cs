@@ -71,13 +71,13 @@ public class VideoPlayerManager : MonoBehaviour
 
             if (playing_time >= 30.0f) // 30초보다 길거나 짧은 영상이 있음. 5초에서 10초 정도 텀이 필요할 수도 있음.
             {
-                if (VidNumb < 70)
+                if (VidNumb < 56)
                 {
                     VidNumb++; // 0~70 -> 비디오 순번으로 설문 문항 실행. -> 비디오 수 변경되면 수정필요.
                     Debug.Log(VidNumb);
                 }
 
-                if (VidNumb % 2 == 0) // 두 개 영상 시청 후, 설문조사 진행 -> 비디오 수 변경되면 수정 필요.
+                if (VidNumb % 2 == 1) // 두 개 영상 시청 후, 설문조사 진행 -> 비디오 수 변경되면 수정 필요.
                 {
                     PlayAccept = false;
                     Debug.Log("Play Accept : " + PlayAccept);

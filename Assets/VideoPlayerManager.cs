@@ -73,11 +73,11 @@ public class VideoPlayerManager : MonoBehaviour
             {
                 if (VidNumb < 56)
                 {
-                    VidNumb++; // 0~70 -> 비디오 순번으로 설문 문항 실행. -> 비디오 수 변경되면 수정필요.
-                    Debug.Log(VidNumb);
+                    VidNumb++; // 0~55 -> 비디오 순번으로 설문 문항 실행. -> 비디오 수 변경되면 수정필요.
+                    Debug.Log("VideoNumber : " + VidNumb);
                 }
 
-                if (VidNumb % 2 == 1) // 두 개 영상 시청 후, 설문조사 진행 -> 비디오 수 변경되면 수정 필요.
+                if (VidNumb % 2 == 0) // 두 개 영상 시청 후, 설문조사 진행 -> 비디오 수 변경되면 수정 필요.
                 {
                     PlayAccept = false;
                     Debug.Log("Play Accept : " + PlayAccept);
@@ -109,13 +109,14 @@ public class VideoPlayerManager : MonoBehaviour
             }
             else if (PlayAccept == false && VidNumb % 2 == 0)
             {
-                Survey[(VidNumb / 2) - 1].SetActive(true); // 비디오 수 변경되면 수정 필요.
+                Debug.Log("Questionare Number : " + (VidNumb / 2));
+                Survey[VidNumb / 2].SetActive(true); // 비디오 수 변경되면 수정 필요.
             }
         }
         // 설문 종료 후 이전 영상 끄고 PlayAccept 변환
         if (SliderManager.SurveyFinish == true)
         {
-            Survey[(VidNumb / 2) - 1].SetActive(false); // 비디오 수 변경되면 수정 필요
+            Survey[VidNumb / 2].SetActive(false); // 비디오 수 변경되면 수정 필요
             SliderManager.SaveTrigger = false;
             StartCoroutine(DelayTime(0.5f));
             PlayAccept = true;
@@ -159,7 +160,7 @@ public class VideoPlayerManager : MonoBehaviour
             if (VidWidth == 3840 && VidHeight == 2160)
             {
                 skyboxMaterial = skyboxMaterial_4K;
-                RenderTexture = RenderTexture_2K;
+                RenderTexture = RenderTexture_4K;
             }
             if (VidWidth == 7680 && VidHeight == 4320)
             {

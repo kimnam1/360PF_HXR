@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class FileManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static List<GameObject> GetChildrenList(GameObject parent) //Children 정보 받아오기
+    {
+        List<GameObject> childrenList = new List<GameObject>();
+
+        foreach (Transform childTransform in parent.transform)
+        {
+            GameObject childGameObject = childTransform.gameObject;
+            childrenList.Add(childGameObject);
+        }
+
+        return childrenList;
+    }
+
+        // Start is called before the first frame update
+        void Start()
     {
         
     }
